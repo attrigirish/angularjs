@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+	<title></title>
+	<script src="angular.js"></script>
+</head>
+<body ng-controller="mycontroller">
+
+	<table>
+		<tr>
+			<td>Category</td>
+			<td><select ng-model="category" ng-change="LoadCourses();">
+				<option>Select</option>
+				<option ng-repeat="category in categories">{{category}}</option>
+			</select></td>
+		</tr>
+		<tr>
+			<td>Course Name</td>
+			<td><select ng-model="course" ng-change="LoadDetails();">
+				<option ng-repeat="course in courses">{{course.name}}</option>
+			</select></td>
+		</tr>
+		<tr>
+			<td>Duration</td>
+			<td>{{duration}}</td>
+		</tr>
+		<tr>
+			<td>Fees</td>
+			<td>{{fees}}</td>
+		</tr>
+	</table>
+
+
+	<script>
+		myapp=angular.module("myapp",[]);
+		myapp.controller('mycontroller', function($scope){
+			$scope.data={
+				'IT':[
+					{'name':'C', 'duration':'40 Hrs', 'fees':6500},
+					{'name':'C++', 'duration':'40 Hrs', 'fees':6500},
+					{'name':'DS', 'duration':'40 Hrs', 'fees':6500},
+					{'name':'Java', 'duration':'40 Hrs', 'fees':11000},
+					{'name':'PHP', 'duration':'40 Hrs', 'fees':11000},					
+				],				
+				'Account':[
+					{'name':'Tally', 'duration':'30 Hrs', 'fees':12500},
+					{'name':'MIS', 'duration':'120 Hrs', 'fees':40500},
+				],
+			};
+
+			$scope.categories=Object.keys($scope.data);
+
+			$scope.LoadCourses=function(){
+				$scope.courses=$scope.data[$scope.category];
+			};
+
+			$scope.LoadDetails=function(){
+				for(i=0;i<$scope.courses.length;i++){					
+					if($scope.courses[i]['name']==$scope.course){
+						$scope.duration=$scope.courses[i]['duration'];
+						$scope.fees=$scope.courses[i]['fees'];
+					}
+				}
+			};
+		});
+	</script>
+</body>
+</html>

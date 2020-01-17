@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title>Data Binding using JavaScript</title>
+	</head>
+	
+	<body>
+		Name : <input type="text" id="name" oninput="Greet();">
+		
+		<h2>Hello <span id="lblname"></span></h2>
+		
+		<script>
+			function Greet()
+			{
+				name=document.getElementById('name').value;
+				document.getElementById('lblname').innerHTML=name;
+			}
+		</script>
+	</body>
+</html>

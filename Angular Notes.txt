@@ -1,0 +1,250 @@
+Angular Directives
+
+1. ng-app
+
+The ng-app directive initializes an AngularJS application. The ng-app directive must be used with the topmost element of the page.
+
+e.g.
+
+<html ng-app>
+or
+<html ng-app="myapp">
+
+
+2. ng-model 
+
+The ng-model directive binds the value of HTML controls (input, select, textarea) to application data (models). The ng-model directive creates a two-way binding between the data element and the model. i.e. The value of the model will be bounded to the element first and if any change occured in the value of the element that change will be saved in the model as well.
+
+
+<input type="text" ng-model="name">
+
+
+3. ng-bind
+
+The ng-bind directive binds the value of a model to an HTML control. ng-bind directive create a one-way binding only i.e. the data of a model will be bounded to the HTML element when the page will load any changes occured in the element will not update the value of the model.
+
+<h1 ng-bind="name"></h1>
+
+4. ng-init
+
+The ng-init directive initializes the models at the time of the loading of the page. 
+
+<body ng-init="name='Girish';city='New Delhi';">
+
+<h1>Hello {{name}}</h1>
+<p>City : {{city}}</p>
+
+
+5. ng-if
+
+The ng-if directive evaluates the specified condition and display the corresponding element only if the specified condition is true.
+
+<body ng-init="login=false">
+
+<div ng-if="login == true">
+Welcome | Logout
+</div>
+<div ng-if="login == false">
+Login | Register
+</div>
+
+
+6. ng-repeat
+
+The ng-repeat directive repeatedly prints the specified element for each value in the array.
+
+<body ng-init="cities=['Delhi','Kolkata','Pune'], usercity="Kolkata">
+
+<select>
+	<option ng-repeat="city in cities | filter:usercity" selected>{{city}}</option>
+</select>
+
+
+
+
+Angular Filters
+
+Angular Filters could be used to apply formattings on the given data. E.g. Currency filter will print the given value in currency format.
+
+
+A. uppercase
+
+<body ng-init="name='girish attri';"
+
+<h1> {{name | uppercase}} </h1>
+
+
+B. lowercase
+
+<body ng-init="name='GIRISH ATTRI';"
+
+<h1> {{name | lowercase}} </h1>
+
+C. number
+
+<body ng-init="amount=23540.342340">
+
+<h3>Amount : {{amount | number}}</h3>
+
+or
+
+<h3>Amount : {{amount | number:2 }}</h1>
+
+
+D. currency
+
+<body ng-init="amount=23450.534400">
+
+<h3>Amount : {{amount | currency}}</h3>
+
+or
+
+<h3>Amount : {{amount | currency : '₹'}}</h3>
+
+or
+
+<h3>Amount : {{amount | currency:'₹':2}} </h3>
+
+
+E. orderBy
+
+<body ng-init="students=[{id:2,name:'Girish'}, {id:1, name:'Ravi'}];">
+
+<table>
+	<tr>
+		<td>Id</td>
+		<td>Name</td>
+	</tr>
+	<tr ng-repeat="student in students | orderBy:'id':true">
+		<td>{{student.id}}</td>
+		<td>{{student.name}}</td>
+	</tr>
+</table>
+
+
+F. filter
+
+<body ng-init="students=['Anil','Sunil','Ravi','Pankaj']">
+
+
+<input type="text" ng-model="name">
+
+<ul>
+	<li ng-repeat="student in students | filter:name">{{student}}</li>
+</ul>
+
+
+G. limitTo
+
+<body ng-init="desc='Jack & Jill went up the hill'; skills=['C','C++','Java','Python','PHP']; number=534553535455;">
+
+<p>{{desc|limitTo:10}}... <a href="#">read more</a></p>
+
+<ul>
+	<li ng-repeat="skill in skills | limitTo:3">{{skill}}</li>
+</ul>
+
+<h3>{{number|limitTo:3}}</h3>
+
+
+H. date
+
+<body ng-init="date='1288323623006'">
+
+<h3>Original Date : {{date}}</h3>
+<h3>Indian Format : {{date|date:'dd/MM/yy'}}
+<h3>Time Zone : {{data|date:'EEEE dd/MM/yy hh:mm':'IST'}}
+
+
+
+Controllers
+
+AngularJS application mainly relies on controllers to control the flow of data in the application. A controller is defined using ng-controller directive. A controller is a JavaScript object that contains attributes/properties, and functions. Each controller accepts $scope as a parameter, which refers to the application/module that the controller needs to handle.
+
+
+
+Angular Events
+---------------
+
+
+1. Mouse Events
+
+ng-click
+ng-dblclick
+ng-mousedown
+ng-mouseup
+ng-mouseenter
+ng-mouseleave
+ng-mousemove
+ng-mouseover
+
+
+2. Keyboard Events
+
+ng-keydown
+ng-keyup
+ng-keypress
+
+
+3. Change Events
+
+ng-change
+
+
+
+Angular Services
+
+In AngularJS, a service is a function, or object, that is available for, and limited to, your AngularJS application.
+
+AngularJS has about 30 built-in services. One of them is the $location service.
+
+
+1. $http
+2. $timeout
+3. $interval
+4. $location
+5. $animate
+6. $controller
+7. $document
+8. $filter
+9. $window etc.
+
+
+
+AJAX calls using $http service.
+
+Syntax:
+
+$http({
+  method: '',
+  url: ''
+}).then(successCallback, failureCallback);
+
+
+Alternative Statements
+
+$http.get('/someUrl', config).then(successCallback, errorCallback);
+
+$http.post('/someUrl', data, config).then(successCallback, errorCallback);
+
+$http.put('/someUrl', data, config).then(successCallback, errorCallback);
+
+$http.delete('/someUrl', data, config).then(successCallback, errorCallback);
+
+
+
+Single Page Applications
+-------------------------
+
+Single-Page Applications (SPAs) are Web apps that load a single HTML page and dynamically update that page as the user interacts with the app.
+
+In a traditional Web app, every time the app calls the server, the server renders a new HTML page. This triggers a page refresh in the browser.
+
+In an SPA, after the first page loads, all interaction with the server happens through AJAX calls. These AJAX calls return data—not markup—usually in JSON format. The app uses the JSON data to update the page dynamically.
+
+One benefit of SPAs is obvious: Applications are more fluid and responsive, without the jarring effect of reloading and re-rendering the page.
+
+In a pure SPA, all UI interaction occurs on the client side, through JavaScript and CSS. After the initial page load, the server acts purely as a service layer. The client just needs to know what HTTP requests to send. It doesn’t care how the server implements things on the back end.
+
+With this architecture, the client and the service are independent. You could replace the entire back end that runs the service, and as long as you don’t change the API, you won’t break the client. The reverse is also true—you can replace the entire client app without changing the service layer. For example, you might write a native mobile client that consumes the service.
+
