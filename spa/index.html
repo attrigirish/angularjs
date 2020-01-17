@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+    <script src="angular-route.js"></script>
+</head>
+<body >
+    <h1>Single Page Application</h1>
+
+    <div ng-view>
+    </div>
+
+    <script>
+        var app = angular.module('myapp', ['ngRoute']);
+
+        app.config(function ($routeProvider,$locationProvider) {            
+
+            $locationProvider.hashPrefix('');   
+
+            $routeProvider.when('/', {
+                templateUrl: 'login.html',
+                controller: 'loginController'
+            }).when('/student/:username', {
+                templateUrl: 'student.html',
+                controller: 'studentController'
+            });
+        });
+
+        app.controller("loginController", function ($scope, $location) {
+           
+            $scope.authenticate = function (username) {
+                $location.path('/student/' + username)
+            };
+
+        });
+
+        app.controller("studentController", function ($scope, $routeParams) {
+            $scope.username = $routeParams.username;
+        });
+
+    </script>
+</body>
+</html>
